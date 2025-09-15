@@ -1,0 +1,42 @@
+# Build artifacts
+*.o
+*.ko
+*.mod
+*.mod.c
+*.symvers
+*.order
+.tmp_versions/
+modules.builtin
+modules.order
+
+# Downloaded driver sources
+amzn-drivers-*/
+ena_linux_*.tar.gz
+
+# Compiled kernel modules
+*.ko.unsigned
+
+# AWS credentials and config (if accidentally placed here)
+.aws/
+*.pem
+*.key
+
+# Temporary files
+*.tmp
+*.log
+*~
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Script outputs and resource IDs
+resource_ids.txt
+cleanup_vars.sh
+
+# Backup files
+*.bak
+*.backup

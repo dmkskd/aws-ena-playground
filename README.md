@@ -37,4 +37,48 @@ We want to:
 - attach a second NIC to the AWS EC2 instance and load the compiled driver
 
 ## Assumptions
-- Using Amazon Linux 6.1
+- Amazon Linux `6.1`
+- AWS ENA driver version `2.15.0`
+
+## Setting all up
+
+### Create Resources
+
+From your local machine or from Cloud Shell, execute [1_create_resources.sh](scripts/1_create_resources.sh)
+
+This will create:
+
+- a security group
+- an EC2 instance
+- a secondary AWS Network Interface, attached to the instance, where the custom ena driver will be loaded on
+
+Please take time to review the script:
+
+- understand the resources being created and the cost impact
+- review the needed variables, as dependon on your AWS account and region
+- at the end of the script, as set of values are provided for the cleanup script
+
+### Check prerequisites
+
+Use [2_check_nitro_prerequisites.sh](scripts/2_check_nitro_prerequisites.sh) to see if your instance is compatible with the ENA driver.
+
+A prerequiste is to be a Nitro-powered instance.
+
+### Compile a custom ENA driver and load it as a kernel module
+
+Download and compile the ENA Driver with [3_compile_ena_driver.sh](scripts/3_compile_ena_driver.sh).
+
+Take the time to look at what the script is doing.
+
+### Mount the module on the 2nd Network Interface
+
+Run the [5_bind_ena_custom.sh](scripts/5_bind_ena_custom.sh) to have the custom built model bound to the 2nd NIC.
+
+### Test traffic is flowing on the 2nd NIC
+
+Run the [5_test_ena_custom_traffic.sh](scripts/6_test_ena_custom_traffic.sh)
+
+### Tear down resources
+
+Use [7_delete_resources.sh](scripts/7_delete_resouces.sh) to tear down the environment
+
